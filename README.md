@@ -1,139 +1,177 @@
-# Proje Adı
+# Git Kullanma Kılavuzu
 
-Kapsamlı bir proje açıklaması. Bu projeyi neden geliştirdiniz, hangi sorunları çözmeyi amaçlıyorsunuz? Projenin sağladığı temel işlevsellikler nelerdir?
+## 1. Git Kurulumu
 
-## Özellikler
+### macOS:
 
-- Projenin sunduğu ana özellikler nelerdir? Liste halinde belirtin.
-- Kullanıcıların projede neler yapabileceğini ve hangi sorunları çözebileceğini detaylandırın.
-- Örneğin:
-  - Kullanıcı dostu arayüz
-  - Yüksek performanslı API
-  - Modüler yapı
+Terminal'i aç ve Homebrew kullanarak Git'i yüklemek için şu komutu çalıştır:
 
-## Gereksinimler
+```bash
+brew install git
+```
 
-Projeyi çalıştırmak için gereken minimum sistem ve yazılım gereksinimlerini listeleyin.
+_Bu komut, Homebrew paket yöneticisi aracılığıyla Git'i yükler._
 
-- **İşletim Sistemi**: macOS, Linux, Windows 10+
-- **Yazılım Gereksinimleri**:
-  - Node.js v14+
-  - npm v6+
-  - Maven (Java projeleri için)
+### Linux:
 
-## Kurulum
+Terminal'i aç ve şu komutları kullanarak Git'i yükleyebilirsin:
 
-Bu projeyi yerel ortamınıza kurmak için aşağıdaki adımları izleyin.
+```bash
+sudo apt update
+sudo apt install git
+```
 
-### 1. Depoyu Klonlama
+_Bu komut, APT paket yöneticisini kullanarak Git'i yükler ve sistemini günceller._
 
-Projeyi bilgisayarınıza klonlamak için aşağıdaki komutu kullanın:
+### Windows:
+
+[Git resmi sitesinden](https://git-scm.com/download/win) Git'i indirip kurulum talimatlarını takip et.
+_Windows kullanıcıları için, indirme ve kurulum süreci adım adım açıklanmıştır._
+
+Kurulumdan sonra, terminal veya komut istemcisinde şu komutla versiyonunu kontrol edebilirsin:
+
+```bash
+git --version
+```
+
+_Yüklemenin başarılı olduğunu doğrulamak için Git versiyonunu kontrol et._
+
+## 2. Git Temel Komutları
+
+### Kullanıcı Bilgilerini Ayarlama:
+
+İlk kez Git kullanıyorsan, kendine ait kullanıcı adı ve e-posta bilgilerini ayarlamalısın:
+
+```bash
+git config --global user.name "SeninAdın"
+git config --global user.email "seninemailin@example.com"
+```
+
+_Bu bilgiler, yaptığın commitlerde yazar olarak kullanılacaktır._
+
+## 3. Yeni Bir Depo Oluşturma
+
+Projeni başlatmak için şu komutu kullanarak yeni bir Git deposu oluşturabilirsin:
+
+```bash
+git init
+```
+
+_Bu komut, bulunduğun dizini bir Git deposuna dönüştürerek, sürüm kontrolü yapmanı sağlar._
+
+## 4. Depoyu GitHub'a Bağlama
+
+GitHub'da yeni bir depo oluşturduktan sonra, projeyi GitHub'a push etmek için şu komutları kullanabilirsin:
+
+1. GitHub'daki depoyu yerel projen ile bağla:
+
+   ```bash
+   git remote add origin https://github.com/kullaniciadi/depo-adi.git
+   ```
+
+   _Bu komut, yerel deponu GitHub'daki uzaktan bir depoya bağlar._
+
+2. Dosyaları commit et ve GitHub'a gönder:
+   ```bash
+   git add .
+   git commit -m "İlk commit"
+   git push -u origin master
+   ```
+   _`git add .` komutu ile tüm değişiklikleri sahneye alırsın, `git commit` ile bu değişiklikleri kaydedersin ve `git push` ile de uzaktaki depoya gönderirsin._
+
+## 5. Var Olan Bir Depoyu Klonlama
+
+GitHub üzerindeki bir projeyi bilgisayarına çekmek için şu komutu kullanabilirsin:
 
 ```bash
 git clone https://github.com/kullaniciadi/proje-adi.git
 ```
 
-### 2. Depoya Gitme
+_Bu komut, belirtilen depoyu yerel bilgisayarına indirir ve çalıştırmaya hazır hale getirir._
 
-Proje dizinine gitmek için şu komutu çalıştırın:
+## 6. Değişiklik Yapma ve Commit Etme
 
-```bash
-cd proje-adi
-```
+Projende değişiklik yaptıktan sonra bu değişiklikleri kaydedip Git'e göndermek için aşağıdaki adımları takip etmelisin:
 
-### 3. Bağımlılıkları Yükleme
+1. Tüm dosyaları ekle:
 
-Node.js projesi için:
+   ```bash
+   git add .
+   ```
 
-```bash
-npm install
-```
+   _Bu komut, tüm değişiklikleri Git'in takip etmesi için sahneye alır._
 
-Java projesi için Maven kullanarak bağımlılıkları yükleyin:
+2. Değişiklikleri commit et:
 
-```bash
-mvn install
-```
+   ```bash
+   git commit -m "Yaptığın değişikliğin açıklaması"
+   ```
 
-### 4. Ortam Değişkenlerini Ayarlama
+   _Yaptığın değişikliklerin ne olduğunu açıklamak için açıklayıcı bir mesaj yazmalısın._
 
-Proje doğru çalışması için bazı ortam değişkenlerine ihtiyaç duyabilir. `.env` dosyasını oluşturup, gereken değişkenleri tanımlayın. Örnek `.env` dosyası:
+3. Değişiklikleri GitHub'a push et:
+   ```bash
+   git push origin branch-adi
+   ```
+   _Bu komut, değişikliklerini uzaktaki depoya gönderir._
 
-```
-API_KEY=your_api_key
-DB_URL=your_database_url
-```
+## 7. Branch Oluşturma ve Birleştirme
 
-## Kullanım
-
-Projeyi başlatmak için aşağıdaki komutları kullanın.
-
-### Node.js projesi
+Yeni bir özellik geliştirmeye başlamadan önce yeni bir branch oluştur:
 
 ```bash
-npm start
+git checkout -b yeni-branch-adi
 ```
 
-### Java projesi (Maven ile)
+_Bu komut, yeni bir branch oluşturur ve bu branch'e geçiş yapar._
+
+Branch'i tamamladıktan sonra ana branch ile birleştirmek için:
 
 ```bash
-mvn spring-boot:run
+git checkout master
+git merge yeni-branch-adi
 ```
 
-Proje çalıştırıldığında, tarayıcınızda `http://localhost:3000` veya `http://localhost:8080` gibi bir adrese giderek uygulamayı görüntüleyebilirsiniz.
+_Bu komutlar, ana branch'e geri dönüp, oluşturduğun yeni branch'i ana branch ile birleştirir._
 
-## Testler
+## 8. Değişiklikleri Geri Alma
 
-Projede yazılmış olan testleri çalıştırmak için şu komutları kullanabilirsiniz:
-
-### Jest ile Test (Node.js)
+Eğer yaptığın bir commit'i geri almak istersen:
 
 ```bash
-npm test
+git revert commit_hash
 ```
 
-### JUnit ile Test (Java)
+_Bu komut, belirtilen commit'i geri alır ve yeni bir commit oluşturur._
+
+Eğer değişiklikleri tamamen silmek istiyorsan:
 
 ```bash
-mvn test
+git reset --hard HEAD~1
 ```
 
-Testlerin tamamlanmasından sonra başarı durumunu konsolda görebilirsiniz.
+_Bu komut, son commit'i geri alır ve dosyalarını en son commit'ten bir önceki hale getirir._
 
-## Katkıda Bulunma
+## 9. Güncel Değişiklikleri Çekme
 
-Projeye katkıda bulunmak için aşağıdaki adımları izleyin:
+Uzaktan depodaki güncellemeleri yerel deponla senkronize etmek için:
 
-1. Depoyu **fork** edin (bu projeyi kendi GitHub hesabınıza kopyalayın).
-2. Yeni bir **branch** oluşturun: `git checkout -b yeni-ozellik-adi`.
-3. Geliştirme yapın ve değişiklikleri **commit** edin: `git commit -m 'Yeni bir özellik eklendi'`.
-4. **Branch**'inizi GitHub'a **push** edin: `git push origin yeni-ozellik-adi`.
-5. Değişikliklerinizi gözden geçirilmek üzere bir **Pull Request** ile gönderin.
+```bash
+git pull origin master
+```
 
-Katkıda bulunurken proje **kod stili** ve **kurallarına** uygun kod yazdığınızdan emin olun.
+_Bu komut, uzaktaki depodan en son değişiklikleri çeker ve yerel deponla birleştirir._
 
-### Kod Standartları
+## 10. Yardım Alma
 
-- Proje ES6+ (Node.js) ya da JDK 11+ (Java) standartlarına uyacak şekilde kodlanmalıdır.
-- Yazdığınız kodu yorumlarla açıklayın.
-- Kodun temiz, okunabilir ve yeniden kullanılabilir olmasına özen gösterin.
+Git ile ilgili yardım almak için aşağıdaki komutu kullanabilirsin:
 
-## Yol Haritası
+```bash
+git help
+```
 
-Gelecekte projeye eklenecek özellikler ve geliştirmeler için bir yol haritası ekleyin. Örneğin:
+_Bu komut, Git'in kullanımına dair bilgiler ve komutlar hakkında yardım almanı sağlar._
 
-- [ ] Yeni kullanıcı arayüzü tasarımı
-- [ ] API performans geliştirmeleri
-- [ ] Daha fazla entegrasyon seçeneği
+## Sonuç
 
-## Bilinen Sorunlar
-
-Bu bölümde, projede bilinen hatalar veya eksiklikler hakkında bilgi verin. Kullanıcıların karşılaşabileceği sorunları ve bu sorunları nasıl çözebileceklerini açıklayın.
-
-## Destek
-
-Projeyi kullanırken herhangi bir sorunla karşılaşırsanız, [issue](https://github.com/kullaniciadi/proje-adi/issues) oluşturabilirsiniz.
-
-## Lisans
-
-Bu proje MIT lisansı ile lisanslanmıştır. Detaylar için [LICENSE](https://github.com/kullaniciadi/proje-adi/blob/main/LICENSE) dosyasına bakabilirsiniz.
+Git, projelerini etkili bir şekilde yönetmeni sağlayan güçlü bir versiyon kontrol sistemidir. Bu kılavuz, Git ile çalışma sürecine başlamak için temel adımları içermektedir.
